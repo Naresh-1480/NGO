@@ -26,10 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
     }
-});
-console.log("Explore Dashboard Button:", document.getElementById("explore-dashboard-button"));
-
-    
+   
     // Check if user is logged in (from localStorage or sessionStorage)
     const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
     console.log("Current user from storage:", currentUser);
