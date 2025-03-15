@@ -7,10 +7,10 @@ document.addEventListener("DOMContentLoaded", function() {
             const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
             if (currentUser) {
                 // Redirect to dashboard if logged in
-                window.location.href = "/frontend/public/Dashboard/index.html";
+                window.location.href = "../Dashboard/index.html";
             } else {
                 // Redirect to authentication if not logged in
-                window.location.href = "/frontend/public/Authentication/index.html";
+                window.location.href = "../Authentication/index.html";
             }
         });
     }
