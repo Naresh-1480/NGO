@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGOTrust - User Dashboard</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo">
+                <span>NGOTrust</span>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#overview"><i class="fas fa-home"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#explore"><i class="fas fa-search"></i> Explore NGOs</a>
+                    </li>
+                    <li>
+                        <a href="#donations"><i class="fas fa-history"></i> Donation History</a>
+                    </li>
+                    <li>
+                        <a href="#profile"><i class="fas fa-user"></i> Profile</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-btn" class="btn-outline">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <div class="header-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search NGOs...">
+                </div>
+                <div class="header-actions">
+                    <button class="btn-outline">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">
+                            <img src="/frontend/public/Dashboard/avatar-placeholder.png" alt="User Avatar">
+                        </div>
+                        <span class="user-name" id="header-username">John Doe</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Sections -->
+            <div class="dashboard-sections">
+                <!-- Overview Section -->
+                <section id="overview" class="dashboard-section active">
+                    <div class="section-header">
+                        <h2>Dashboard Overview</h2>
+                    </div>
+                    
+                    <div class="welcome-banner">
+                        <div class="welcome-content">
+                            <h3>Welcome back, <span id="welcome-username">John Doe</span>!</h3>
+                            <p>Track your donations and explore verified NGOs making a difference.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-cards">
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="stats-info">
+                                <h4>Wallet Balance</h4>
+                                <p><span id="wallet-balance">1,250.00</span> XRC20</p>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-hand-holding-heart"></i>
+                            </div>
+                            <div class="stats-info">
+                                <h4>Total Donations</h4>
+                                <p><span id="total-donations">750.00</span> XRC20</p>
+                            </div>
+                        </div>
+                        <div class="stats-card">
+                            <div class="stats-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="stats-info">
+                                <h4>NGOs Supported</h4>
+                                <p><span id="ngos-supported">5</span> Organizations</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <div class="section-subheader">
+                            <h3>Recent Activity</h3>
+                            <a href="#donations" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-donate"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Donation to Clean Water Initiative</h4>
+                                    <p>You donated 100 XRC20 tokens</p>
+                                    <span class="activity-date">March 10, 2025</span>
+                                </div>
+                                <div class="activity-status verified">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-donate"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Donation to Education for All</h4>
+                                    <p>You donated 150 XRC20 tokens</p>
+                                    <span class="activity-date">February 28, 2025</span>
+                                </div>
+                                <div class="activity-status verified">
+                                    <i class="fas fa-check-circle"></i> Verified
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-plus-circle"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <h4>Added funds to wallet</h4>
+                                    <p>Added 500 XRC20 tokens to your wallet</p>
+                                    <span class="activity-date">February 15, 2025</span>
+                                </div>
+                                <div class="activity-status completed">
+                                    <i class="fas fa-check"></i> Completed
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recommended-ngos">
+                        <div class="section-subheader">
+                            <h3>Recommended NGOs</h3>
+                            <a href="#explore" class="view-all">View All <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                        <div class="ngo-cards">
+                            <div class="ngo-card">
+                                <div class="ngo-logo">
+                                    <img src="/frontend/public/Dashboard/ngo-logo-1.png" alt="NGO Logo">
+                                </div>
+                                <div class="ngo-info">
+                                    <h4>Clean Water Initiative</h4>
+                                    <p>Providing clean water to rural communities</p>
+                                    <div class="ngo-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 75%"></div>
+                                        </div>
+                                        <span>75% funded</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary">Donate</button>
+                            </div>
+                            <div class="ngo-card">
+                                <div class="ngo-logo">
+                                    <img src="/frontend/public/Dashboard/ngo-logo-2.png" alt="NGO Logo">
+                                </div>
+                                <div class="ngo-info">
+                                    <h4>Reforestation Project</h4>
+                                    <p>Planting trees to combat climate change</p>
+                                    <div class="ngo-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 45%"></div>
+                                        </div>
+                                        <span>45% funded</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary">Donate</button>
+                            </div>
+                            <div class="ngo-card">
+                                <div class="ngo-logo">
+                                    <img src="/frontend/public/Dashboard/ngo-logo-3.png" alt="NGO Logo">
+                                </div>
+                                <div class="ngo-info">
+                                    <h4>Education for All</h4>
+                                    <p>Building schools in underserved areas</p>
+                                    <div class="ngo-progress">
+                                        <div class="progress-bar">
+                                            <div class="progress" style="width: 60%"></div>
+                                        </div>
+                                        <span>60% funded</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary">Donate</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Explore NGOs Section -->
+                <section id="explore" class="dashboard-section">
+                    <div class="section-header">
+                        <h2>Explore NGOs</h2>
+                    </div>
+                    
+                    <div class="explore-filters">
+                        <div class="filter-search">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="Search NGOs by name or cause...">
+                        </div>
+                        <div class="filter-options">
+                            <div class="filter-group">
+                                <label>Category</label>
+                                <select>
+                                    <option value="">All Categories</option>
+                                    <option value="education">Education</option>
+                                    <option value="health">Health & Medical</option>
+                                    <option value="environment">Environment</option>
+                                    <option value="poverty">Poverty Relief</option>
+                                    <option value="disaster">Disaster Relief</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Sort By</label>
+                                <select>
+                                    <option value="popularity">Popularity</option>
+                                    <option value="recent">Recently Added</option>
+                                    <option value="funding">Funding Needed</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-outline btn-filter">
+                            <i class="fas fa-sliders-h"></i> More Filters
+                        </button>
+                    </div>
+                    
+                    <div class="ngo-list">
+                        <div class="ngo-item">
+                            <div class="ngo-item-logo">
+                                <img src="/frontend/public/Dashboard/ngo-logo-1.png" alt="NGO Logo">
+                            </div>
+                            <div class="ngo-item-info">
+                                <h3>Clean Water Initiative</h3>
+                                <span class="ngo-category environment">Environment</span>
+                                <p>We provide clean water solutions to communities in need, focusing on sustainable water management systems and education.</p>
+                                <div class="ngo-item-stats">
+                                    <div class="ngo-stat">
+                                        <i class="fas fa-users"></i>
+                                        <span>2,500+ Beneficiaries</span>
+                                    </div>
+                                    <div class="ngo-stat">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Rural India</span>
+                                    </div>
+                                    <div class="ngo-stat">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Verified</span>
+                                    </div>
+                                </div>
+                                <div class="ngo-item-progress">
+                                    <div class="progress-info">
+                                        <span>Current funding: 15,000 XRC20</span>
+                                        <span>Goal: 20,000 XRC20</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ngo-item-actions">
+                                <button class="btn btn-primary">Donate Now</button>
+                                <button class="btn btn-outline">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ngo-item">
+                            <div class="ngo-item-logo">
+                                <img src="/frontend/public/Dashboard/ngo-logo-2.png" alt="NGO Logo">
+                            </div>
+                            <div class="ngo-item-info">
+                                <h3>Reforestation Project</h3>
+                                <span class="ngo-category environment">Environment</span>
+                                <p>Our mission is to restore forest ecosystems by planting native trees, creating habitats for wildlife, and fighting climate change.</p>
+                                <div class="ngo-item-stats">
+                                    <div class="ngo-stat">
+                                        <i class="fas fa-tree"></i>
+                                        <span>50,000+ Trees Planted</span>
+                                    </div>
+                                    <div class="ngo-stat">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span>Multiple Locations</span>
+                                    </div>
+                                    <div class="ngo-stat">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Verified</span>
+                                    </div>
+                                </div>
+                                <div class="ngo-item-progress">
+                                    <div class="progress-info">
+                                        <span>Current funding: 9,000 XRC20</span>
+                                        <span>Goal: 20,000 XRC20</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ngo-item-actions">
+                                <button class="btn btn-primary">Donate Now</button>
+                                <button class="btn btn-outline">View Details</button>
+                            </div>
+                        </div>
+                        
+                        <div class="ngo-item">
+                            <div class="ngo-item-logo">
+                                <img src="/frontend/public/Dashboard/ngo-logo-3.png" alt="NGO Logo">

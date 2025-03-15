@@ -212,6 +212,42 @@
     color: #4267B2;
 }
 
+/* Role Selection Styles */
+.role-selection {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.role-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.role-option:hover {
+    background-color: var(--bg-light);
+}
+
+.role-option input[type="radio"] {
+    margin: 0;
+}
+
+.role-option input[type="radio"]:checked + label {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.role-option:has(input[type="radio"]:checked) {
+    border-color: var(--primary-color);
+    background-color: rgba(var(--primary-rgb), 0.05);
+}
+
 /* Make it responsive */
 @media (max-width: 1024px) {
     .auth-container {
@@ -229,5 +265,10 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
+    }
+    
+    .role-selection {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }

@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const confirmPassword = document.getElementById('signup-confirm-password').value;
         const termsChecked = document.getElementById('terms').checked;
         
+        // Get selected role
+        const roleUser = document.getElementById('role-user');
+        const roleNGO = document.getElementById('role-ngo');
+        const userRole = roleUser.checked ? 'user' : (roleNGO.checked ? 'ngo' : '');
+        
         // Simple validation
         if (!name || !email || !password || !confirmPassword) {
             showNotification('error', 'Please fill in all fields');
@@ -57,12 +62,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        if (!userRole) {
+            showNotification('error', 'Please select your role');
+            return;
+        }
+        
         // Store user data (in localStorage for demo purposes)
         // In a real application, this would be sent to a server
         const userData = {
             name: name,
             email: email,
             password: password, // In a real app, never store passwords in plain text
+            role: userRole, // Store the user role
             dateCreated: new Date().toISOString()
         };
         
@@ -120,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentUser = {
             name: user.name,
             email: user.email,
+            role: user.role, // Include the user role
             isLoggedIn: true,
             loginTime: new Date().toISOString()
         };
@@ -135,9 +147,15 @@ document.addEventListener('DOMContentLoaded', function() {
         // Show success message
         showNotification('success', 'Login successful! Redirecting to dashboard...');
         
-        // Redirect to home page after 2 seconds
+        // Role-based redirection
         setTimeout(() => {
-            window.location.href = '/frontend/public/Homepage/index.html';
+            if (user.role === 'ngo') {
+                // Redirect to NGO dashboard
+                window.location.href = '/frontend/public/NGODashboard/index.html';
+            } else {
+                // Redirect to User dashboard
+                window.location.href = '/frontend/public/UserDashboard/index.html';
+            }
         }, 2000);
     });
     
@@ -187,9 +205,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const localUser = JSON.parse(localStorage.getItem('ngotrust_current_user') || 'null');
         const sessionUser = JSON.parse(sessionStorage.getItem('ngotrust_current_user') || 'null');
         
-        if (localUser && localUser.isLoggedIn || sessionUser && sessionUser.isLoggedIn) {
-            // User is already logged in, redirect to homepage
-            window.location.href = '/frontend/public/Homepage/index.html';
+        const currentUser = localUser || sessionUser;
+        
+        if (currentUser && currentUser.isLoggedIn) {
+            // User is already logged in, redirect based on role
+            setTimeout(() => {
+                if (currentUser.role === 'ngo') {
+                    // Redirect to NGO dashboard
+                    window.location.href = '/frontend/public/NGODashboard/index.html';
+                } else {
+                    // Redirect to User dashboard
+                    window.location.href = '/frontend/public/UserDashboard/index.html';
+                }
+            }, 100);
         }
     }
     
