@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
+console.log("Explore Dashboard Button:", document.getElementById("explore-dashboard-button"));
 
     
     // Check if user is logged in (from localStorage or sessionStorage)
