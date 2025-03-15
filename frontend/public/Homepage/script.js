@@ -1,5 +1,3 @@
-console.log(Updated)
-
 document.addEventListener("DOMContentLoaded", function() {
     // Explore Dashboard button handling
     const exploreDashboardButton = document.getElementById("explore-dashboard-button");
