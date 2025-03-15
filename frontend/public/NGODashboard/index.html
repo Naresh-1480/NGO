@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO Dashboard - NGOTrust</title>
+    <link rel="stylesheet" href="/frontend/public/NGODashboard/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span>NGOTrust</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#overview" class="active">
+                    <i class="fas fa-home"></i>
+                    Dashboard
+                </a>
+                <a href="#donations">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    Donations
+                </a>
+                <a href="#withdrawals">
+                    <i class="fas fa-wallet"></i>
+                    Withdrawals
+                </a>
+                <a href="#profile">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="#" id="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="top-bar">
+                <div class="current-time">
+                    <i class="far fa-clock"></i>
+                    <span id="current-time"></span>
+                </div>
+                <div class="user-info">
+                    <span class="greeting">Welcome, </span>
+                    <span id="ngo-name">Loading...</span>
+                </div>
+            </header>
+
+            <!-- Overview Section -->
+            <section id="overview" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>Dashboard Overview</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Donations</h3>
+                            <p id="total-donations">0 XRC20</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Available Balance</h3>
+                            <p id="available-balance">0 XRC20</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Donors</h3>
+                            <p id="total-donors">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Recent Activity</h3>
+                    <div class="activity-list" id="recent-activities">
+                        <!-- Activities will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Donations Section -->
+            <section id="donations" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Donation Management</h2>
+                </div>
+                <div class="donation-filters">
+                    <input type="date" id="date-filter" class="filter-input">
+                    <input type="text" id="donor-filter" placeholder="Search by donor" class="filter-input">
+                    <select id="amount-filter" class="filter-input">
+                        <option value="">All Amounts</option>
+                        <option value="0-100">0-100 XRC20</option>
+                        <option value="101-1000">101-1000 XRC20</option>
+                        <option value="1001+">1001+ XRC20</option>
+                    </select>
+                </div>
+                <div class="donations-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Donor</th>
+                                <th>Amount</th>
+                                <th>Transaction ID</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donations-list">
+                            <!-- Donations will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Withdrawals Section -->
+            <section id="withdrawals" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Fund Withdrawal</h2>
+                </div>
+                <div class="withdrawal-form">
+                    <h3>Request Withdrawal</h3>
+                    <form id="withdrawal-form">
+                        <div class="form-group">
+                            <label>Amount (XRC20)</label>
+                            <input type="number" id="withdrawal-amount" required min="0" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label>Wallet Address</label>
+                            <input type="text" id="wallet-address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Request Withdrawal</button>
+                    </form>
+                </div>
+                <div class="withdrawal-history">
+                    <h3>Withdrawal History</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Transaction ID</th>
+                            </tr>
+                        </thead>
+                        <tbody id="withdrawal-history">
+                            <!-- Withdrawal history will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Profile Section -->
+            <section id="profile" class="dashboard-section">
+                <div class="section-header">
+                    <h2>NGO Profile</h2>
+                </div>
+                <div class="profile-content">
+                    <div class="profile-form">
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label>NGO Name</label>
+                                <input type="text" id="profile-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mission Statement</label>
+                                <textarea id="profile-mission" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Contact Email</label>
+                                <input type="email" id="profile-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" id="profile-phone">
+                            </div>
+                            <div class="form-group">
+                                <label>Wallet Address</label>
+                                <input type="text" id="profile-wallet" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </form>
+                    </div>
+                    <div class="document-verification">
+                        <h3>Document Verification</h3>
+                        <div class="document-upload">
+                            <label for="document-input" class="upload-area">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Drag & Drop or Click to Upload Documents</span>
+                                <input type="file" id="document-input" multiple accept=".pdf,.doc,.docx">
+                            </label>
+                        </div>
+                        <div class="uploaded-documents" id="uploaded-documents">
+                            <!-- Uploaded documents will be listed here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <h3>Confirm Withdrawal</h3>
+            <p>Are you sure you want to withdraw <span id="confirm-amount">0</span> XRC20?</p>
+            <div class="modal-buttons">
+                <button class="btn btn-outline" id="cancel-withdrawal">Cancel</button>
+                <button class="btn btn-primary" id="confirm-withdrawal">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/frontend/public/NGODashboard/script.js"></script>
+</body>
+</html>
