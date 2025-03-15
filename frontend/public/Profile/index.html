@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - NGOTrust</title>
+    <link rel="stylesheet" href="/frontend/public/Homepage/style.css">
+    <link rel="stylesheet" href="/frontend/public/Profile/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="/frontend/public/logo-placeholder.png" alt="NGOTrust Logo">
+                <span>NGOTrust</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/frontend/public/Homepage/index.html#features">Features</a></li>
+                <li><a href="/frontend/public/Homepage/index.html#how-it-works">How It Works</a></li>
+                <li><a href="/frontend/public/Homepage/index.html#demo">Demo</a></li>
+                <li><a href="/frontend/public/Homepage/index.html#for-ngos">For NGOs</a></li>
+                <li><a href="/frontend/public/Homepage/index.html#about">About</a></li>
+            </ul>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" id="logout-button">LOGOUT</button>
+                <button class="btn btn-primary" id="profile-button" style="display: none;">PROFILE</button>
+            </div>
+            <div class="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">
+                <img src="/frontend/public/logo-placeholder.png" alt="NGOTrust Logo">
+                <span>NGOTrust</span>
+            </div>
+            <div class="mobile-menu-close"></div>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="/frontend/public/Homepage/index.html#features">Features</a></li>
+            <li><a href="/frontend/public/Homepage/index.html#how-it-works">How It Works</a></li>
+            <li><a href="/frontend/public/Homepage/index.html#demo">Demo</a></li>
+            <li><a href="/frontend/public/Homepage/index.html#for-ngos">For NGOs</a></li>
+            <li><a href="/frontend/public/Homepage/index.html#about">About</a></li>
+        </ul>
+        <div class="mobile-menu-cta"></div>
+    </div>
+
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-picture">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="profile-details">
+                <h1 class="profile-name">John Doe</h1>
+                <div class="profile-info">
+                    <p><i class="fas fa-envelope"></i> johndoe@example.com</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                </div>
+                <div class="profile-badges">
+                    <span class="profile-badge"><i class="fas fa-donate"></i> Donor</span>
+                    <span class="profile-badge verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-primary"><i class="fas fa-edit"></i> Edit Profile</button>
+                    <button class="btn btn-outline"><i class="fas fa-key"></i> Change Password</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-tabs">
+            <div class="profile-tab active" data-tab="dashboard">Dashboard</div>
+            <div class="profile-tab" data-tab="transactions">Donation History</div>
+            <div class="profile-tab" data-tab="saved-ngos">Saved NGOs</div>
+            <div class="profile-tab" data-tab="blockchain">Blockchain Info</div>
+            <div class="profile-tab" data-tab="security">Security</div>
+            <div class="profile-tab" data-tab="settings">Settings</div>
+        </div>
+
+        <div class="tab-content active" id="dashboard">
+            <div class="dashboard-summary">
+                <div class="summary-card">
+                    <h3>Total Donations</h3>
+                    <div class="value">$2,450</div>
+                    <div class="change"><i class="fas fa-arrow-up"></i> 12% from last month</div>
+                </div>
+                <div class="summary-card">
+                    <h3>NGOs Supported</h3>
+                    <div class="value">8</div>
+                    <div class="change"><i class="fas fa-arrow-up"></i> 2 new this month</div>
+                </div>
+                <div class="summary-card">
+                    <h3>Available Tax Credits</h3>
+                    <div class="value">$850</div>
+                    <div class="change"><i class="fas fa-info-circle"></i> For current fiscal year</div>
+                </div>
+            </div>
+
+            <h3>Recent Transactions</h3>
+            <div class="transaction-list">
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Clean Water Initiative</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Mar 12, 2025</span>
+                                <span><i class="fas fa-tag"></i> Health</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $250.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Education for All</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Feb 28, 2025</span>
+                                <span><i class="fas fa-tag"></i> Education</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $500.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Habitat Restoration</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Feb 15, 2025</span>
+                                <span><i class="fas fa-tag"></i> Environment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $150.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="transactions">
+            <h3>All Donations</h3>
+            <div class="transaction-list">
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Clean Water Initiative</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Mar 12, 2025</span>
+                                <span><i class="fas fa-tag"></i> Health</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $250.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Education for All</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Feb 28, 2025</span>
+                                <span><i class="fas fa-tag"></i> Education</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $500.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Habitat Restoration</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Feb 15, 2025</span>
+                                <span><i class="fas fa-tag"></i> Environment</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $150.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Food Security Program</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Jan 30, 2025</span>
+                                <span><i class="fas fa-tag"></i> Hunger</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $300.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-hand-holding-heart"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Children's Health Initiative</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Jan 15, 2025</span>
+                                <span><i class="fas fa-tag"></i> Health</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $200.00
+                        <span class="status">Confirmed</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Tax Receipts</h3>
+            <div class="tax-receipt">
+                <div class="tax-receipt-info">
+                    <h4>Annual Donation Summary - 2024</h4>
+                    <span class="date">Generated on Jan 10, 2025</span>
+                </div>
+                <button class="download-btn">
+                    <i class="fas fa-download"></i> Download PDF
+                </button>
+            </div>
+            <div class="tax-receipt">
+                <div class="tax-receipt-info">
+                    <h4>Annual Donation Summary - 2023</h4>
+                    <span class="date">Generated on Jan 12, 2024</span>
+                </div>
+                <button class="download-btn">
+                    <i class="fas fa-download"></i> Download PDF
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content" id="saved-ngos">
+            <h3>Your Favorite NGOs</h3>
+            <div class="saved-ngos">
+                <div class="ngo-card">
+                    <img src="/api/placeholder/400/320" alt="Clean Water Initiative">
+                    <div class="ngo-card-content">
+                        <h4>Clean Water Initiative</h4>
+                        <p>Providing clean water access to underprivileged communities worldwide.</p>
+                        <div class="ngo-card-footer">
+                            <div class="ngo-stats">
+                                <i class="fas fa-users"></i> 15,000+ helped
+                            </div>
+                            <button class="btn btn-sm btn-primary">Donate</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ngo-card">
+                    <img src="/api/placeholder/400/320" alt="Education for All">
+                    <div class="ngo-card-content">
+                        <h4>Education for All</h4>
+                        <p>Supporting education initiatives in developing countries.</p>
+                        <div class="ngo-card-footer">
+                            <div class="ngo-stats">
+                                <i class="fas fa-users"></i> 25,000+ helped
+                            </div>
+                            <button class="btn btn-sm btn-primary">Donate</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ngo-card">
+                    <img src="/api/placeholder/400/320" alt="Habitat Restoration">
+                    <div class="ngo-card-content">
+                        <h4>Habitat Restoration</h4>
+                        <p>Working to restore and protect critical wildlife habitats.</p>
+                        <div class="ngo-card-footer">
+                            <div class="ngo-stats">
+                                <i class="fas fa-tree"></i> 5,000+ acres saved
+                            </div>
+                            <button class="btn btn-sm btn-primary">Donate</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ngo-card-content">
+                    <h4>Food Security Program</h4>
+                    <p>Fighting hunger and promoting sustainable agriculture in food-insecure regions.</p>
+                    <div class="ngo-card-footer">
+                        <div class="ngo-stats">
+                            <i class="fas fa-users"></i> 10,000+ helped
+                        </div>
+                        <button class="btn btn-sm btn-primary">Donate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="blockchain">
+        <h3>Blockchain Information</h3>
+        <div class="blockchain-info">
+            <h4><i class="fas fa-wallet"></i> Your Wallet Address</h4>
+            <div class="wallet-address">
+                0x1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t
+                <button class="copy-btn" id="copy-wallet-btn">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+            <p>All of your donations are securely recorded on the blockchain, ensuring transparency and accountability.</p>
+            <div class="transaction-explorer">
+                <h4>Recent Blockchain Transactions</h4>
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Clean Water Initiative</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Mar 12, 2025</span>
+                                <span><i class="fas fa-link"></i> 0x2c3d...9f0g</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $250.00
+                        <a href="#" class="explorer-link">View on Explorer</a>
+                    </div>
+                </div>
+                
+                <div class="transaction-item">
+                    <div class="transaction-info">
+                        <div class="transaction-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <h4>Education for All</h4>
+                            <div class="meta">
+                                <span><i class="fas fa-calendar"></i> Feb 28, 2025</span>
+                                <span><i class="fas fa-link"></i> 0x3d4e...8g9h</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">
+                        $500.00
+                        <a href="#" class="explorer-link">View on Explorer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="security">
+        <div class="settings-section">
+            <h3>Security Settings</h3>
+            <div class="security-options">
+                <div class="security-card">
+                    <h4><i class="fas fa-lock"></i> Password</h4>
+                    <p>Secure your account with a strong password. We recommend changing it regularly.</p>
+                    <button class="btn btn-primary btn-sm">Change Password</button>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-shield-alt"></i> Two-Factor Authentication</h4>
+                    <div class="security-status">
+                        <div class="status-indicator enabled">
+                            <i class="fas fa-check-circle"></i> Enabled
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p>Add an extra layer of security to your account with 2FA.</p>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-bell"></i> Security Notifications</h4>
+                    <div class="security-status">
+                        <div class="status-indicator enabled">
+                            <i class="fas fa-check-circle"></i> Enabled
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p>Receive notifications about important security events.</p>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-history"></i> Login History</h4>
+                    <p>Review your recent login activity to ensure account security.</p>
+                    <button class="btn btn-primary btn-sm">View Login History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="settings">
+        <div class="settings-section">
+            <h3>Profile Information</h3>
+            <form id="profile-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" value="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" value="Doe">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" value="johndoe@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" value="+1 (555) 123-4567">
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+        
+        <div class="settings-section">
+            <h3>Notification Preferences</h3>
+            <div class="security-options">
+                <div class="security-card">
+                    <h4><i class="fas fa-envelope"></i> Email Notifications</h4>
+                    <div class="security-status">
+                        <div class="status-indicator enabled">
+                            <i class="fas fa-check-circle"></i> Enabled
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p>Receive updates and notifications via email.</p>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-mobile-alt"></i> SMS Notifications</h4>
+                    <div class="security-status">
+                        <div class="status-indicator disabled">
+                            <i class="fas fa-times-circle"></i> Disabled
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p>Receive updates and notifications via SMS.</p>
+                </div>
+                
+                <div class="security-card">
+                    <h4><i class="fas fa-newspaper"></i> Newsletter</h4>
+                    <div class="security-status">
+                        <div class="status-indicator enabled">
+                            <i class="fas fa-check-circle"></i> Enabled
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <p>Receive our monthly newsletter with impact stories.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="settings-section">
+            <h3>Account Management</h3>
+            <p>Need to take a break? You can deactivate your account temporarily.</p>
+            <button class="btn btn-outline btn-danger">Deactivate Account</button>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <div class="logo">
+                <img src="/frontend/public/logo-placeholder.png" alt="NGOTrust Logo">
+                <span>NGOTrust</span>
+            </div>
+            <p>Transparent and secure donations for a better world.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">How It Works</a></li>
+                <li><a href="#">For NGOs</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p><i class="fas fa-envelope"></i> info@ngotrust.org</p>
+            <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Trust Street, City, Country</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 NGOTrust. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="/frontend/public/Profile/script.js"></script>
+</body>
+</html>
