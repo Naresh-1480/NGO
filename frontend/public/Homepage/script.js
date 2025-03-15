@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
             if (currentUser) {
                 // Redirect to dashboard if logged in
-                window.location.href = "../Dashboard/index.html";
+                window.location.href = "../Authentication/index.html";
             } else {
                 // Redirect to authentication if not logged in
                 window.location.href = "../Authentication/index.html";
