@@ -1,3 +1,9 @@
+window.onload = function() {
+    localStorage.clear();  // Clears data when the page loads
+};
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
     // Explore Dashboard button handling
     const exploreDashboardButton = document.getElementById("explore-dashboard-button");
@@ -10,17 +16,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 // Redirect to authentication if not logged in
                 window.location.href = "../Authentication/index.html";
             } else {
-                // Parse user data (assuming it's stored as JSON)
-                const userData = JSON.parse(currentUser);
-
-                // Check user role and redirect accordingly
-                if (userData.role === "NGO") {
-                    window.location.href = "../NGODashboard/index.html";
-                } else if (userData.role === "Donor") {
-                    window.location.href = "../UserDashboard/index.html";
-                } else {
-                    // Default case (fallback)
-                    alert("Invalid user role! Redirecting to authentication.");
+                try {
+                    // Parse user data
+                    const userData = JSON.parse(currentUser);
+                    
+                    // For debugging - add this temporarily
+                    console.log("User data:", userData);
+                    console.log("User role:", userData.role);
+                    
+                    // Check user role (case-insensitive)
+                    const userRole = (userData.role || "").trim().toUpperCase();
+                    if (userRole === "NGO") {
+                        window.location.href = "/frontend/public/NGODashboard/index.html";
+                    } else if (userRole === "DONOR") {
+                        window.location.href = "/frontend/public/UserDashboard/index.html";
+                    } else {
+                        // Debug the actual role value
+                        console.error("Invalid role found:", userData.role);
+                        alert("Invalid user role: '" + userData.role + "'. Check console for details.");
+                        window.location.href = "../Authentication/index.html";
+                    }
+                } catch (error) {
+                    console.error("Error parsing user data:", error);
+                    alert("Error reading user data. Redirecting to authentication.");
                     window.location.href = "../Authentication/index.html";
                 }
             }

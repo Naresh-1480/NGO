@@ -151,10 +151,10 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             if (user.role === 'ngo') {
                 // Redirect to NGO dashboard
-                window.location.href = '/NGO/frontend/public/NGODashboard/index.html';
+                window.location.href = '/frontend/public/NGODashboard/index.html';
             } else {
                 // Redirect to User dashboard
-                window.location.href = '/NGO/frontend/public/UserDashboard/index.html';
+                window.location.href = '/frontend/public/UserDashboard/index.html';
             }
         }, 2000);
     });
@@ -212,10 +212,10 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => {
                 if (currentUser.role === 'ngo') {
                     // Redirect to NGO dashboard
-                    window.location.href = '/NGO/frontend/public/NGODashboard/index.html';
+                    window.location.href = '/frontend/public/NGODashboard/index.html';
                 } else {
                     // Redirect to User dashboard
-                    window.location.href = '/NGO/frontend/public/UserDashboard/index.html';
+                    window.location.href = '/frontend/public/UserDashboard/index.html';
                 }
             }, 100);
         }
