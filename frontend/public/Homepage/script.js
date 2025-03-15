@@ -5,15 +5,29 @@ document.addEventListener("DOMContentLoaded", function() {
         exploreDashboardButton.addEventListener("click", function() {
             // Check if user is logged in
             const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
-            if (currentUser) {
-                // Redirect to dashboard if logged in
-                window.location.href = "../Authentication/index.html";
-            } else {
+
+            if (!currentUser) {
                 // Redirect to authentication if not logged in
                 window.location.href = "../Authentication/index.html";
+            } else {
+                // Parse user data (assuming it's stored as JSON)
+                const userData = JSON.parse(currentUser);
+
+                // Check user role and redirect accordingly
+                if (userData.role === "NGO") {
+                    window.location.href = "../NGODashboard/index.html";
+                } else if (userData.role === "Donor") {
+                    window.location.href = "../UserDashboard/index.html";
+                } else {
+                    // Default case (fallback)
+                    alert("Invalid user role! Redirecting to authentication.");
+                    window.location.href = "../Authentication/index.html";
+                }
             }
         });
     }
+});
+
     
     // Check if user is logged in (from localStorage or sessionStorage)
     const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
