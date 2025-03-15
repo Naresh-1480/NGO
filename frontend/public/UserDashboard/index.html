@@ -327,6 +327,261 @@
                             </div>
                         </div>
                         
-                        <div class="ngo-item">
-                            <div class="ngo-item-logo">
-                                <img src="/frontend/public/Dashboard/ngo-logo-3.png" alt="NGO Logo">
+                    </div>
+                    <div class="ngo-item-info">
+                        <h3>Education for All</h3>
+                        <span class="ngo-category education">Education</span>
+                        <p>We build schools and provide educational resources in underserved communities, focusing on equal access to quality education.</p>
+                        <div class="ngo-item-stats">
+                            <div class="ngo-stat">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>15,000+ Students Helped</span>
+                            </div>
+                            <div class="ngo-stat">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Southeast Asia</span>
+                            </div>
+                            <div class="ngo-stat">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Verified</span>
+                            </div>
+                        </div>
+                        <div class="ngo-item-progress">
+                            <div class="progress-info">
+                                <span>Current funding: 12,000 XRC20</span>
+                                <span>Goal: 20,000 XRC20</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ngo-item-actions">
+                        <button class="btn btn-primary">Donate Now</button>
+                        <button class="btn btn-outline">View Details</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+        
+        <!-- Donations History Section -->
+        <section id="donations" class="dashboard-section">
+            <div class="section-header">
+                <h2>Donation History</h2>
+            </div>
+            
+            <div class="donation-filters">
+                <div class="filter-date">
+                    <label>Filter by date:</label>
+                    <select>
+                        <option value="all">All Time</option>
+                        <option value="month">Last Month</option>
+                        <option value="quarter">Last Quarter</option>
+                        <option value="year">Last Year</option>
+                    </select>
+                </div>
+                <div class="filter-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search by NGO name...">
+                </div>
+            </div>
+            
+            <div class="donation-history">
+                <div class="transaction-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>NGO</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Transaction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>March 10, 2025</td>
+                                <td>Clean Water Initiative</td>
+                                <td>100 XRC20</td>
+                                <td><span class="status-verified">Verified</span></td>
+                                <td>
+                                    <a href="#" class="transaction-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> View on XinFin
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>February 28, 2025</td>
+                                <td>Education for All</td>
+                                <td>150 XRC20</td>
+                                <td><span class="status-verified">Verified</span></td>
+                                <td>
+                                    <a href="#" class="transaction-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> View on XinFin
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>February 15, 2025</td>
+                                <td>Reforestation Project</td>
+                                <td>200 XRC20</td>
+                                <td><span class="status-verified">Verified</span></td>
+                                <td>
+                                    <a href="#" class="transaction-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> View on XinFin
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>January 20, 2025</td>
+                                <td>Disaster Relief Fund</td>
+                                <td>300 XRC20</td>
+                                <td><span class="status-verified">Verified</span></td>
+                                <td>
+                                    <a href="#" class="transaction-link" target="_blank">
+                                        <i class="fas fa-external-link-alt"></i> View on XinFin
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn active">1</button>
+                    <button class="pagination-btn">2</button>
+                    <button class="pagination-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <!-- Download Report -->
+                <div class="download-report">
+                    <button class="btn btn-outline">
+                        <i class="fas fa-download"></i> Download Donation Report
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Profile Section -->
+        <section id="profile" class="dashboard-section">
+            <div class="section-header">
+                <h2>Profile Settings</h2>
+            </div>
+            
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img src="/frontend/public/Dashboard/avatar-placeholder.png" alt="User Avatar">
+                            <div class="avatar-edit">
+                                <i class="fas fa-camera"></i>
+                            </div>
+                        </div>
+                        <div class="profile-name">
+                            <h3 id="profile-username">John Doe</h3>
+                            <p>Joined January 2025</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <form id="profile-form">
+                            <div class="form-group">
+                                <label>Full Name</label>
+                                <input type="text" id="full-name" value="John Doe">
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="email" value="john.doe@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label>XinFin Wallet Address</label>
+                                <div class="wallet-address">
+                                    <input type="text" id="wallet-address" value="xdc42a5b5d799fdcb45c4086df4baf83469248...a17d" readonly>
+                                    <button class="btn btn-outline btn-small copy-address">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Notification Preferences</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="notify-donations" checked>
+                                        <label for="notify-donations">Donation confirmations</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="notify-updates" checked>
+                                        <label for="notify-updates">NGO project updates</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="notify-news">
+                                        <label for="notify-news">NGOTrust newsletter</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="wallet-card">
+                    <div class="wallet-header">
+                        <h3>Wallet Management</h3>
+                    </div>
+                    <div class="wallet-balance">
+                        <div class="balance-amount">
+                            <span class="balance-label">Current Balance</span>
+                            <span class="balance-value">1,250.00 XRC20</span>
+                        </div>
+                        <div class="balance-actions">
+                            <button class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add Funds
+                            </button>
+                        </div>
+                    </div>
+                    <div class="wallet-connect">
+                        <h4>Connected Wallet</h4>
+                        <div class="wallet-status connected">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Connected to XinFin Wallet</span>
+                        </div>
+                        <button class="btn btn-outline btn-small">
+                            <i class="fas fa-exchange-alt"></i> Switch Wallet
+                        </button>
+                    </div>
+                    <div class="wallet-security">
+                        <h4>Security Settings</h4>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="require-password" checked>
+                            <label for="require-password">Require password for donations</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="two-factor" checked>
+                            <label for="two-factor">Enable two-factor authentication</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    </main>
+    </div>
+    
+    <script src="dashboard.js"></script>
+    </body>
+    </html>
