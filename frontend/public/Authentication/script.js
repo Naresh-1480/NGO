@@ -170,10 +170,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 localStorage.setItem('ngotrust_user', JSON.stringify(data.user));
 
                 setTimeout(() => {
-                    if (data.user.role === 'ngo') {
-                        window.location.href = '/NGODashboard.html';
+                    if (userRole === 'ngo') {
+                        window.location.href = '/frontend/public/NGODashboard/index.html';
                     } else {
-                        window.location.href = '/UserDashboard.html';
+                        window.location.href = '/frontend/public/UserDashboard/index.html';
                     }
                 }, 2000);
             } else {
