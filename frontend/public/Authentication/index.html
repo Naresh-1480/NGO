@@ -88,66 +88,67 @@
                 </div>
             </div>
             
-            <!-- Signup Form -->
-            <div class="auth-form" id="signup-form">
-                <h2>Create Account</h2>
-                <p>Join NGOTrust for transparent donations</p>
+            <!-- Donor Signup Form -->
+            <div class="auth-form" id="donor-signup-form">
+                <h2>Create Donor Account</h2>
+                <p>Join NGOTrust to make transparent donations</p>
                 
                 <div class="form-group">
-                    <label for="signup-name">Full Name</label>
+                    <label for="donor-name">Full Name</label>
                     <div class="input-with-icon">
                         <i class="fas fa-user"></i>
-                        <input type="text" id="signup-name" placeholder="Your full name">
+                        <input type="text" id="donor-name" placeholder="Your full name">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="signup-email">Email</label>
+                    <label for="donor-email">Email</label>
                     <div class="input-with-icon">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" id="signup-email" placeholder="Your email">
+                        <input type="email" id="donor-email" placeholder="Your email">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="signup-password">Password</label>
+                    <label for="donor-phone">Phone Number</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="donor-phone" placeholder="Your phone number">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="donor-wallet">Wallet Address (Optional)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-wallet"></i>
+                        <input type="text" id="donor-wallet" placeholder="Your blockchain wallet address">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="donor-password">Password</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="signup-password" placeholder="Create a password">
+                        <input type="password" id="donor-password" placeholder="Create a password">
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="signup-confirm-password">Confirm Password</label>
+                    <label for="donor-confirm-password">Confirm Password</label>
                     <div class="input-with-icon">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="signup-confirm-password" placeholder="Confirm your password">
-                    </div>
-                </div>
-                
-                <!-- Added User Role Selection -->
-                <div class="form-group">
-                    <label>I am a:</label>
-                    <div class="role-selection">
-                        <div class="role-option">
-                            <input type="radio" id="role-user" name="user-role" value="user" checked>
-                            <label for="role-user">Donor</label>
-                        </div>
-                        <div class="role-option">
-                            <input type="radio" id="role-ngo" name="user-role" value="ngo">
-                            <label for="role-ngo">NGO</label>
-                        </div>
+                        <input type="password" id="donor-confirm-password" placeholder="Confirm your password">
                     </div>
                 </div>
                 
                 <div class="form-options">
                     <div class="remember-me">
-                        <input type="checkbox" id="terms">
-                        <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        <input type="checkbox" id="donor-terms">
+                        <label for="donor-terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
                     </div>
                 </div>
                 
-                <button class="btn btn-primary btn-block" id="signup-button">Create Account</button>
+                <button class="btn btn-primary btn-block" id="donor-signup-button">Create Donor Account</button>
                 
                 <div class="or-divider">
                     <span>or</span>
@@ -163,6 +164,117 @@
                         <span>Sign up with Facebook</span>
                     </button>
                 </div>
+            </div>
+            
+            <!-- NGO Signup Form -->
+            <div class="auth-form" id="ngo-signup-form">
+                <h2>Register Your NGO</h2>
+                <p>Join NGOTrust for transparent donation tracking</p>
+                
+                <div class="form-group">
+                    <label for="ngo-name">NGO Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-building"></i>
+                        <input type="text" id="ngo-name" placeholder="Your NGO name">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-email">Email</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="ngo-email" placeholder="NGO email address">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-registration">Registration Number</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="ngo-registration" placeholder="Official registration number">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-certificate">Government Approval Certificate (Optional)</label>
+                    <div class="input-with-icon file-input">
+                        <i class="fas fa-certificate"></i>
+                        <input type="file" id="ngo-certificate" accept=".pdf,.jpg,.png">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-contact-name">Contact Person Name</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="ngo-contact-name" placeholder="Contact person's name">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-contact-phone">Contact Person Phone Number</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="ngo-contact-phone" placeholder="Contact person's phone">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-address">NGO Address</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" id="ngo-address" placeholder="Full address of the NGO">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-website">Website (Optional)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-globe"></i>
+                        <input type="url" id="ngo-website" placeholder="NGO website URL">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-mission">Purpose/Mission of NGO</label>
+                    <div class="input-with-icon textarea-icon">
+                        <i class="fas fa-bullseye"></i>
+                        <textarea id="ngo-mission" placeholder="Describe your NGO's mission and purpose" rows="3"></textarea>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-wallet">Wallet Address (for receiving donations)</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-wallet"></i>
+                        <input type="text" id="ngo-wallet" placeholder="Blockchain wallet address">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="ngo-password" placeholder="Create a password">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ngo-confirm-password">Confirm Password</label>
+                    <div class="input-with-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="ngo-confirm-password" placeholder="Confirm your password">
+                    </div>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="ngo-terms">
+                        <label for="ngo-terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary btn-block" id="ngo-signup-button">Register NGO</button>
             </div>
         </div>
         

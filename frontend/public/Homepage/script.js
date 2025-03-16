@@ -2,46 +2,14 @@ window.onload = function() {
     localStorage.clear();  // Clears data when the page loads
 };
 
-
-
 document.addEventListener("DOMContentLoaded", function() {
     // Explore Dashboard button handling
     const exploreDashboardButton = document.getElementById("explore-dashboard-button");
     if (exploreDashboardButton) {
         exploreDashboardButton.addEventListener("click", function() {
-            // Check if user is logged in
-            const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
-
-            if (!currentUser) {
-                // Redirect to authentication if not logged in
-                window.location.href = "../Authentication/index.html";
-            } else {
-                try {
-                    // Parse user data
-                    const userData = JSON.parse(currentUser);
-                    
-                    // For debugging - add this temporarily
-                    console.log("User data:", userData);
-                    console.log("User role:", userData.role);
-                    
-                    // Check user role (case-insensitive)
-                    const userRole = (userData.role || "").trim().toUpperCase();
-                    if (userRole === "NGO") {
-                        window.location.href = "/frontend/public/NGODashboard/index.html";
-                    } else if (userRole === "DONOR") {
-                        window.location.href = "/frontend/public/UserDashboard/index.html";
-                    } else {
-                        // Debug the actual role value
-                        console.error("Invalid role found:", userData.role);
-                        alert("Invalid user role: '" + userData.role + "'. Check console for details.");
-                        window.location.href = "../Authentication/index.html";
-                    }
-                } catch (error) {
-                    console.error("Error parsing user data:", error);
-                    alert("Error reading user data. Redirecting to authentication.");
-                    window.location.href = "../Authentication/index.html";
-                }
-            }
+            // When "Register NGO" button is clicked, set role to NGO and redirect to authentication
+            localStorage.setItem("ngotrust_preselected_role", "NGO");
+            window.location.href = "../Authentication/index.html";
         });
     }
 
@@ -49,57 +17,80 @@ document.addEventListener("DOMContentLoaded", function() {
     const currentUser = localStorage.getItem("ngotrust_current_user") || sessionStorage.getItem("ngotrust_current_user");
     console.log("Current user from storage:", currentUser);
     
-    // Query the mobile menu element first
-    const mobileMenu = document.querySelector(".mobile-menu");
-    
-    // Existing mobile menu logic
+    // Mobile menu handling
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    if (mobileMenuBtn && mobileMenu) {
+    
+    if (mobileMenuBtn) {
         mobileMenuBtn.addEventListener('click', function() {
+            // Create mobile menu dynamically if it doesn't exist
+            let mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (!mobileMenu) {
+                mobileMenu = document.createElement('div');
+                mobileMenu.className = 'mobile-menu';
+                
+                const menuHTML = `
+                    <div class="mobile-menu-header">
+                        <div class="logo">
+                            <span>NGOTrust</span>
+                        </div>
+                        <div class="mobile-menu-close"></div>
+                    </div>
+                    <div class="mobile-menu-links">
+                        <a href="#features">Features</a>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#for-ngos">For NGOs</a>
+                        <a href="#about">About</a>
+                    </div>
+                    <div class="mobile-menu-cta">
+                        <button class="btn btn-primary" id="mobile-donate-button">Make a Donation</button>
+                        <button class="btn btn-outline" id="mobile-explore-button">Register NGO</button>
+                    </div>
+                `;
+                
+                mobileMenu.innerHTML = menuHTML;
+                document.body.appendChild(mobileMenu);
+                
+                // Add event listeners to new elements
+                const closeBtn = mobileMenu.querySelector('.mobile-menu-close');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+                
+                const mobileMenuLinks = mobileMenu.querySelectorAll('.mobile-menu-links a');
+                mobileMenuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                });
+                
+                // Mobile donate button
+                const mobileDonateButton = document.getElementById('mobile-donate-button');
+                if (mobileDonateButton) {
+                    mobileDonateButton.addEventListener('click', function() {
+                        // When "Make a Donation" button is clicked, set role to DONOR and redirect to authentication
+                        localStorage.setItem("ngotrust_preselected_role", "DONOR");
+                        window.location.href = "../Authentication/index.html";
+                    });
+                }
+                
+                // Mobile explore button (for NGO registration)
+                const mobileExploreButton = document.getElementById('mobile-explore-button');
+                if (mobileExploreButton) {
+                    mobileExploreButton.addEventListener('click', function() {
+                        // When "Register NGO" button is clicked, set role to NGO and redirect to authentication
+                        localStorage.setItem("ngotrust_preselected_role", "NGO");
+                        window.location.href = "../Authentication/index.html";
+                    });
+                }
+            }
+            
             mobileMenu.classList.add('active');
             document.body.style.overflow = 'hidden';
-        });
-    }
-
-    const closeBtn = document.querySelector('.mobile-menu-close');
-    if (closeBtn && mobileMenu) {
-        closeBtn.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-    }
-
-    // Close mobile menu when clicking a link
-    if (mobileMenu) {
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-        });
-    }
-
-    // Demo Tabs
-    const demoTabs = document.querySelectorAll('.demo-tab');
-    const demoPanels = document.querySelectorAll('.demo-panel');
-    
-    if (demoTabs.length > 0 && demoPanels.length > 0) {
-        demoTabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Remove active class from all tabs
-                demoTabs.forEach(t => t.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                this.classList.add('active');
-                
-                // Hide all panels
-                demoPanels.forEach(panel => panel.classList.remove('active'));
-                
-                // Show the corresponding panel
-                const tabId = this.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
-            });
         });
     }
     
@@ -163,53 +154,44 @@ document.addEventListener("DOMContentLoaded", function() {
         handleScroll();
     }
     
-    // Add testimonial carousel if there are testimonials
-    const testimonialCarousel = document.querySelector('.testimonial-carousel');
+    // Add sticky header behavior
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
     
-    if (testimonialCarousel) {
-        const testimonials = testimonialCarousel.querySelectorAll('.testimonial');
-        const prevBtn = testimonialCarousel.querySelector('.prev-btn');
-        const nextBtn = testimonialCarousel.querySelector('.next-btn');
-        let currentIndex = 0;
-        
-        // Function to show testimonial at index
-        const showTestimonial = function(index) {
-            testimonials.forEach((testimonial, i) => {
-                if (i === index) {
-                    testimonial.classList.add('active');
+    if (header) {
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 100) {
+                header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                
+                if (scrollTop > lastScrollTop) {
+                    // Scrolling down
+                    header.style.transform = 'translateY(-100%)';
                 } else {
-                    testimonial.classList.remove('active');
+                    // Scrolling up
+                    header.style.transform = 'translateY(0)';
                 }
-            });
-        };
-        
-        // Initialize carousel
-        showTestimonial(currentIndex);
-        
-        // Previous button click
-        if (prevBtn) {
-            prevBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length;
-                showTestimonial(currentIndex);
-            });
-        }
-        
-        // Next button click
-        if (nextBtn) {
-            nextBtn.addEventListener('click', function() {
-                currentIndex = (currentIndex + 1) % testimonials.length;
-                showTestimonial(currentIndex);
-            });
-        }
-        
-        // Auto advance carousel
-        setInterval(function() {
-            if (document.visibilityState === 'visible') {
-                currentIndex = (currentIndex + 1) % testimonials.length;
-                showTestimonial(currentIndex);
+            } else {
+                header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+                header.style.transform = 'translateY(0)';
             }
-        }, 5000);
+            
+            lastScrollTop = scrollTop;
+        });
     }
+    
+    // Donation functionality for buttons - now redirect to authentication with DONOR role
+    const donateButtons = document.querySelectorAll('#donate-button, #cta-donate-button');
+    donateButtons.forEach(button => {
+        if (button) {
+            button.addEventListener('click', function() {
+                // Set preselected role to DONOR and redirect to authentication
+                localStorage.setItem("ngotrust_preselected_role", "DONOR");
+                window.location.href = "../Authentication/index.html";
+            });
+        }
+    });
     
     // Newsletter form submission
     const newsletterForm = document.querySelector('.newsletter form');
@@ -266,51 +248,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     emailInput.style.borderColor = '';
                 }, 3000);
             }
-        });
-    }
-    
-    // Add sticky header behavior
-    const header = document.querySelector('header');
-    let lastScrollTop = 0;
-    
-    if (header) {
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 100) {
-                header.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                
-                if (scrollTop > lastScrollTop) {
-                    // Scrolling down
-                    header.style.transform = 'translateY(-100%)';
-                } else {
-                    // Scrolling up
-                    header.style.transform = 'translateY(0)';
-                }
-            } else {
-                header.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-    }
-    
-    // Donation functionality 
-    const donateButton = document.getElementById('donate-button');
-    if (donateButton) {
-        donateButton.addEventListener('click', function() {
-            // Placeholder for donation modal
-            alert('Donation functionality will be implemented in the next phase of the project.');
-        });
-    }
-    
-    // CTA Donate button
-    const ctaDonateButton = document.getElementById('cta-donate-button');
-    if (ctaDonateButton) {
-        ctaDonateButton.addEventListener('click', function() {
-            // Placeholder for donation modal
-            alert('Donation functionality will be implemented in the next phase of the project.');
         });
     }
 });
