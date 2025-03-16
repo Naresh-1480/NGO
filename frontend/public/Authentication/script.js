@@ -1,8 +1,8 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Get role from URL parameters first
     const urlParams = new URLSearchParams(window.location.search);
     let userRole = urlParams.get('role');
-    
+
     // If not in URL, check localStorage (this is what your homepage is using)
     if (!userRole) {
         const storedRole = localStorage.getItem('ngotrust_preselected_role');
@@ -12,28 +12,27 @@ document.addEventListener('DOMContentLoaded', function() {
             userRole = 'donor';
         }
     }
-    
-    // Now proceed with your existing code, but using the updated userRole
+
+    // Tabs and forms
     const loginTab = document.getElementById('login-tab');
     const signupTab = document.getElementById('signup-tab');
     const loginForm = document.getElementById('login-form');
     const donorSignupForm = document.getElementById('donor-signup-form');
     const ngoSignupForm = document.getElementById('ngo-signup-form');
-    
-    loginTab.addEventListener('click', function() {
+
+    loginTab.addEventListener('click', function () {
         loginTab.classList.add('active');
         signupTab.classList.remove('active');
         loginForm.classList.add('active');
         donorSignupForm.classList.remove('active');
         ngoSignupForm.classList.remove('active');
     });
-    
-    signupTab.addEventListener('click', function() {
+
+    signupTab.addEventListener('click', function () {
         signupTab.classList.add('active');
         loginTab.classList.remove('active');
         loginForm.classList.remove('active');
-        
-        // Show appropriate signup form based on role
+
         if (userRole === 'ngo') {
             ngoSignupForm.classList.add('active');
             donorSignupForm.classList.remove('active');
@@ -42,347 +41,166 @@ document.addEventListener('DOMContentLoaded', function() {
             ngoSignupForm.classList.remove('active');
         }
     });
-    
-    // Initial form setup based on role
+
+    // Initial form setup
     if (userRole) {
         signupTab.click();
         if (userRole === 'ngo') {
-            // Explicitly show NGO form
             loginForm.classList.remove('active');
             donorSignupForm.classList.remove('active');
             ngoSignupForm.classList.add('active');
         }
     }
-    
-    // Form validation and submission
-    const donorSignupButton = document.getElementById('donor-signup-button');
-    const ngoSignupButton = document.getElementById('ngo-signup-button');
-    const loginButton = document.getElementById('login-button');
-    
-    // Donor signup form submission
-    donorSignupButton.addEventListener('click', function() {
-        const name = document.getElementById('donor-name').value.trim();
+
+    // Donor Signup
+    document.getElementById('donor-signup-button').addEventListener('click', async function (e) {
+        e.preventDefault();
+
+        const fullName = document.getElementById('donor-name').value.trim();
         const email = document.getElementById('donor-email').value.trim();
         const phone = document.getElementById('donor-phone').value.trim();
-        const wallet = document.getElementById('donor-wallet').value.trim(); // Optional
+        const walletAddress = document.getElementById('donor-wallet').value.trim();
         const password = document.getElementById('donor-password').value;
         const confirmPassword = document.getElementById('donor-confirm-password').value;
         const termsChecked = document.getElementById('donor-terms').checked;
-        
-        // Simple validation
-        if (!name || !email || !phone || !password || !confirmPassword) {
-            showNotification('error', 'Please fill in all required fields');
+
+        if (!fullName || !email || !phone || !password || !confirmPassword) {
+            showNotification('error', 'Please fill in all required fields.');
             return;
         }
-        
+
         if (password !== confirmPassword) {
-            showNotification('error', 'Passwords do not match');
+            showNotification('error', 'Passwords do not match.');
             return;
         }
-        
+
         if (!termsChecked) {
-            showNotification('error', 'Please agree to terms and conditions');
+            showNotification('error', 'Please agree to the terms and conditions.');
             return;
         }
-        
-        if (!validateEmail(email)) {
-            showNotification('error', 'Please enter a valid email address');
-            return;
+
+        const donorData = { fullName, email, phone, walletAddress, password };
+
+        try {
+            const response = await fetch('http://localhost:5000/api/donors/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(donorData)
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showNotification('success', 'Donor account created successfully! Redirecting to login...');
+                setTimeout(() => loginTab.click(), 2000);
+            } else {
+                showNotification('error', data.error || 'Something went wrong.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('error', 'Server error. Try again later.');
         }
-        
-        if (password.length < 8) {
-            showNotification('error', 'Password must be at least 8 characters');
-            return;
-        }
-        
-        // Store user data (in localStorage for demo purposes)
-        // In a real application, this would be sent to a server
-        const userData = {
-            name: name,
-            email: email,
-            phone: phone,
-            wallet: wallet,
-            password: password, // In a real app, never store passwords in plain text
-            role: 'donor',
-            dateCreated: new Date().toISOString()
-        };
-        
-        // Get existing users or initialize new array
-        const users = JSON.parse(localStorage.getItem('ngotrust_users') || '[]');
-        
-        // Check if email already exists
-        const emailExists = users.some(user => user.email === email);
-        if (emailExists) {
-            showNotification('error', 'This email is already registered');
-            return;
-        }
-        
-        // Add new user
-        users.push(userData);
-        
-        // Save back to localStorage
-        localStorage.setItem('ngotrust_users', JSON.stringify(users));
-        
-        // Show success message
-        showNotification('success', 'Donor account created successfully! Redirecting to login...');
-        
-        // Switch to login tab after 2 seconds
-        setTimeout(() => {
-            loginTab.click();
-            // Auto-fill the email in login form
-            document.getElementById('login-email').value = email;
-        }, 2000);
     });
-    
-    // NGO signup form submission
-    ngoSignupButton.addEventListener('click', function() {
-        const ngoName = document.getElementById('ngo-name').value.trim();
-        const email = document.getElementById('ngo-email').value.trim();
-        const registration = document.getElementById('ngo-registration').value.trim();
-        const contactName = document.getElementById('ngo-contact-name').value.trim();
-        const contactPhone = document.getElementById('ngo-contact-phone').value.trim();
-        const address = document.getElementById('ngo-address').value.trim();
-        const website = document.getElementById('ngo-website').value.trim(); // Optional
-        const mission = document.getElementById('ngo-mission').value.trim();
-        const wallet = document.getElementById('ngo-wallet').value.trim();
-        const password = document.getElementById('ngo-password').value;
-        const confirmPassword = document.getElementById('ngo-confirm-password').value;
-        const termsChecked = document.getElementById('ngo-terms').checked;
+
+    // NGO Signup
+    document.getElementById('ngo-signup-button').addEventListener('click', async function (e) {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('ngoName', document.getElementById('ngo-name').value.trim());
+        formData.append('email', document.getElementById('ngo-email').value.trim());
+        formData.append('registrationNumber', document.getElementById('ngo-registration').value.trim());
+        formData.append('contactPersonName', document.getElementById('ngo-contact-name').value.trim());
+        formData.append('contactPersonPhone', document.getElementById('ngo-contact-phone').value.trim());
+        formData.append('ngoAddress', document.getElementById('ngo-address').value.trim());
+        formData.append('website', document.getElementById('ngo-website').value.trim());
+        formData.append('mission', document.getElementById('ngo-mission').value.trim());
+        formData.append('walletAddress', document.getElementById('ngo-wallet').value.trim());
+        formData.append('password', document.getElementById('ngo-password').value);
         
-        // Get file input
-        const certificateInput = document.getElementById('ngo-certificate');
-        const hasCertificate = certificateInput.files.length > 0;
-        
-        // Simple validation for required fields
-        if (!ngoName || !email || !registration || !contactName || !contactPhone || 
-            !address || !mission || !wallet || !password || !confirmPassword) {
-            showNotification('error', 'Please fill in all required fields');
-            return;
+        const certificateInput = document.getElementById('ngo-certificate').files[0];
+        if (certificateInput) {
+            formData.append('governmentApprovalCertificate', certificateInput);
         }
-        
-        if (password !== confirmPassword) {
-            showNotification('error', 'Passwords do not match');
-            return;
+
+        try {
+            const response = await fetch('http://localhost:5000/api/ngos/register', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showNotification('success', 'NGO registered successfully! Redirecting to login...');
+                setTimeout(() => loginTab.click(), 2000);
+            } else {
+                showNotification('error', data.error || 'Something went wrong.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            showNotification('error', 'Server error. Try again later.');
         }
-        
-        if (!termsChecked) {
-            showNotification('error', 'Please agree to terms and conditions');
-            return;
-        }
-        
-        if (!validateEmail(email)) {
-            showNotification('error', 'Please enter a valid email address');
-            return;
-        }
-        
-        if (password.length < 8) {
-            showNotification('error', 'Password must be at least 8 characters');
-            return;
-        }
-        
-        // Store NGO data (in localStorage for demo purposes)
-        // In a real application, this would be sent to a server along with the certificate file
-        const ngoData = {
-            ngoName: ngoName,
-            email: email,
-            registration: registration,
-            hasCertificate: hasCertificate,
-            contactName: contactName,
-            contactPhone: contactPhone,
-            address: address,
-            website: website,
-            mission: mission,
-            wallet: wallet,
-            password: password, // In a real app, never store passwords in plain text
-            role: 'ngo',
-            verified: false, // NGOs might need verification before full access
-            dateCreated: new Date().toISOString()
-        };
-        
-        // Get existing users or initialize new array
-        const users = JSON.parse(localStorage.getItem('ngotrust_users') || '[]');
-        
-        // Check if email already exists
-        const emailExists = users.some(user => user.email === email);
-        if (emailExists) {
-            showNotification('error', 'This email is already registered');
-            return;
-        }
-        
-        // Add new NGO
-        users.push(ngoData);
-        
-        // Save back to localStorage
-        localStorage.setItem('ngotrust_users', JSON.stringify(users));
-        
-        // Show success message
-        showNotification('success', 'NGO registered successfully! Redirecting to login...');
-        
-        // Switch to login tab after 2 seconds
-        setTimeout(() => {
-            loginTab.click();
-            // Auto-fill the email in login form
-            document.getElementById('login-email').value = email;
-        }, 2000);
     });
-    
-    // Login form submission
-    loginButton.addEventListener('click', function() {
+
+    // Login
+    document.getElementById('login-button').addEventListener('click', async function (e) {
+        e.preventDefault();
+
         const email = document.getElementById('login-email').value.trim();
         const password = document.getElementById('login-password').value;
-        const rememberMe = document.getElementById('remember').checked;
-        
-        // Simple validation
+
         if (!email || !password) {
-            showNotification('error', 'Please enter both email and password');
+            showNotification('error', 'Please enter both email and password.');
             return;
         }
-        
-        // Get users from localStorage
-        const users = JSON.parse(localStorage.getItem('ngotrust_users') || '[]');
-        
-        // Check if user exists and password matches
-        const user = users.find(user => user.email === email && user.password === password);
-        
-        if (!user) {
-            showNotification('error', 'Invalid email or password');
-            return;
-        }
-        
-        // Login successful, store current user
-        const currentUser = {
-            name: user.name || user.ngoName,
-            email: user.email,
-            role: user.role,
-            isLoggedIn: true,
-            loginTime: new Date().toISOString()
-        };
-        
-        if (rememberMe) {
-            // Store in localStorage for persistent login
-            localStorage.setItem('ngotrust_current_user', JSON.stringify(currentUser));
-        } else {
-            // Store in sessionStorage for session-only login
-            sessionStorage.setItem('ngotrust_current_user', JSON.stringify(currentUser));
-        }
-        
-        // Show success message
-        showNotification('success', 'Login successful! Redirecting to dashboard...');
-        
-        // Role-based redirection
-        setTimeout(() => {
-            if (user.role === 'ngo') {
-                // Redirect to NGO dashboard
-                window.location.href = '/frontend/public/NGODashboard/index.html';
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showNotification('success', 'Login successful! Redirecting...');
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('ngotrust_user', JSON.stringify(data.user));
+
+                setTimeout(() => {
+                    if (data.user.role === 'ngo') {
+                        window.location.href = '/NGODashboard.html';
+                    } else {
+                        window.location.href = '/UserDashboard.html';
+                    }
+                }, 2000);
             } else {
-                // Redirect to User dashboard
-                window.location.href = '/frontend/public/UserDashboard/index.html';
+                showNotification('error', data.error || 'Invalid email or password.');
             }
-        }, 2000);
-    });
-    
-    // Utility function to validate email
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    // Function to show notification
-    function showNotification(type, message) {
-        // Remove existing notification if any
-        const existingNotification = document.querySelector('.notification');
-        if (existingNotification) {
-            existingNotification.remove();
+        } catch (error) {
+            console.error('Login Error:', error);
+            showNotification('error', 'Server error. Try again later.');
         }
-        
-        // Create notification element
+    });
+
+    function showNotification(type, message) {
+        const existingNotification = document.querySelector('.notification');
+        if (existingNotification) existingNotification.remove();
+
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
         notification.textContent = message;
-        
-        // Add close button
+
         const closeBtn = document.createElement('span');
         closeBtn.className = 'notification-close';
         closeBtn.innerHTML = '&times;';
-        closeBtn.addEventListener('click', function() {
-            notification.remove();
-        });
-        
+        closeBtn.addEventListener('click', () => notification.remove());
+
         notification.appendChild(closeBtn);
-        
-        // Add to document
         document.body.appendChild(notification);
-        
-        // Auto remove after 5 seconds
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.remove();
-            }
-        }, 5000);
+
+        setTimeout(() => notification.remove(), 5000);
     }
-    
-    // Modified checkLoggedInUser function
-    function checkLoggedInUser() {
-        // Get role from URL or localStorage
-        const urlParams = new URLSearchParams(window.location.search);
-        const attemptedRole = urlParams.get('role') || 
-                             (localStorage.getItem('ngotrust_preselected_role') === 'NGO' ? 'ngo' : 
-                              localStorage.getItem('ngotrust_preselected_role') === 'DONOR' ? 'donor' : null);
-        
-        // Check both localStorage and sessionStorage for logged in user
-        const localUser = JSON.parse(localStorage.getItem('ngotrust_current_user') || 'null');
-        const sessionUser = JSON.parse(sessionStorage.getItem('ngotrust_current_user') || 'null');
-        
-        const currentUser = localUser || sessionUser;
-        
-        if (currentUser && currentUser.isLoggedIn) {
-            // Only redirect if user is not trying to access a different role's registration
-            if (!attemptedRole || currentUser.role === attemptedRole) {
-                // User is already logged in with same role, redirect based on role
-                setTimeout(() => {
-                    if (currentUser.role === 'ngo') {
-                        // Redirect to NGO dashboard
-                        window.location.href = '/frontend/public/NGODashboard/index.html';
-                    } else {
-                        // Redirect to User dashboard
-                        window.location.href = '/frontend/public/UserDashboard/index.html';
-                    }
-                }, 100);
-            } else if (attemptedRole && currentUser.role !== attemptedRole) {
-                // User is trying to access a different role's registration
-                // Ask if they want to log out first
-                const confirmLogout = confirm(`You are currently logged in as a ${currentUser.role}. Do you want to log out and register as a ${attemptedRole}?`);
-                
-                if (confirmLogout) {
-                    // Log out the user
-                    localStorage.removeItem('ngotrust_current_user');
-                    sessionStorage.removeItem('ngotrust_current_user');
-                    
-                    // Show notification
-                    showNotification('info', 'Logged out successfully. You can now register with a new role.');
-                    
-                    // Force page reload to reset forms
-                    window.location.reload();
-                } else {
-                    // Redirect to current role's dashboard
-                    setTimeout(() => {
-                        if (currentUser.role === 'ngo') {
-                            window.location.href = '/frontend/public/NGODashboard/index.html';
-                        } else {
-                            window.location.href = '/frontend/public/UserDashboard/index.html';
-                        }
-                    }, 100);
-                }
-            }
-        }
-        
-        // Clear the localStorage value after reading it to prevent it affecting future visits
-        // We only clear it after the check is complete to ensure the attempted role is preserved
-        if (!attemptedRole) {
-            localStorage.removeItem('ngotrust_preselected_role');
-        }
-    }
-    
-    // Run initial check
-    checkLoggedInUser();
 });
